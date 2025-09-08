@@ -28,3 +28,21 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+def calculator_view(request, dish: str=None):
+    recipe = {}
+    if request.GET.get('servings'):
+        servings = int(request.GET.get('servings'))
+    else:
+        servings = 1
+
+    if dish in DATA.keys():
+        for key, value in DATA[dish].items():
+            recipe[key] = value * servings
+            msg = f"Рецепт блюда {dish}: "
+    else:
+        msg = f"Вы указали неизвестное блюдо. Укажите одно из значений: {list(DATA.keys())}"
+    context = {
+        'recipe' : recipe,
+        'msg' : msg
+    }
+    return render(request, 'calculator/index.html', context)
