@@ -16,5 +16,32 @@
       "author": "Джордж Оруэл",
       "pub_date": "2016-12-06"
     }
+  },
+  {
+    "model": "books.book",
+    "pk": 3,
+    "fields": {
+      "name": "Страховщик",
+      "author": "Бентли Литтл",
+      "pub_date": "2016-12-06"
+    }
+  },  
+  {
+    "model": "books.book",
+    "pk": 4,
+    "fields": {
+      "name": "Виновата тайна",
+      "author": "Наталья Корсакова",
+      "pub_date": "2016-12-01"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 5,
+    "fields": {
+      "name": "Это бред!",
+      "author": "Светлана Бардина",
+      "pub_date": "2018-02-27"
+    }
   }
 ]
