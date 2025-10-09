@@ -1,0 +1,41 @@
+get http://localhost:8000/api/sensors/
+
+###
+
+get http://localhost:8000/api/sensors/1/
+
+###
+
+post http://localhost:8000/api/sensors/
+Content-Type: application/json
+
+{
+        "name": "За окном",
+        "description": "Датчик температуры на улице"
+}
+
+###
+
+patch http://localhost:8000/api/sensors/6/
+Content-Type: application/json
+
+{
+        "name": "На улице",
+        "description": "Датчик температуры на улице"
+}
+
+###
+
+delete http://localhost:8000/api/sensors/9/
+
+###
+
+post http://localhost:8000/api/measurements/
+Content-Type: application/json
+
+{
+        "sensor": "1",
+        "temperature": 30
+}
+
+###
