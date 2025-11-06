@@ -7,24 +7,24 @@ POST {{baseUrl}}/products/
 Content-Type: application/json
 
 {
-  "title": "Помидор",
-  "description": "Лучшие помидоры на рынке"
+  "title": "Баклажан",
+  "description": "Лучшие баклажан на рынке"
 }
 
 ###
 
 # получение продуктов
-GET {{baseUrl}}/products/
+GET {{baseUrl}}/products/?page=2
 Content-Type: application/json
 
 ###
 
 # обновление продукта
-PATCH {{baseUrl}}/products/1/
+PATCH {{baseUrl}}/products/2/
 Content-Type: application/json
 
 {
-  "description": "Самые сочные и ароматные помидорки"
+  "description": "Лучший огурец на рынке"
 }
 
 ###
@@ -36,7 +36,7 @@ Content-Type: application/json
 ###
 
 # поиск продуктов по названию и описанию
-GET {{baseUrl}}/products/?search=помидор
+GET {{baseUrl}}/products/?search=рынке
 Content-Type: application/json
 
 ###
@@ -46,7 +46,7 @@ POST {{baseUrl}}/stocks/
 Content-Type: application/json
 
 {
-  "address": "мой адрес не дом и не улица, мой адрес сегодня такой: www.ленинград-спб.ru3",
+  "address": "г. Симферополь, ул. Долетова, д. 39",
   "positions": [
     {
       "product": 2,
@@ -76,7 +76,7 @@ Content-Type: application/json
     },
     {
       "product": 3,
-      "quantity": 243,
+      "quantity": 250,
       "price": 145
     }
   ]
@@ -86,4 +86,10 @@ Content-Type: application/json
 
 # поиск складов, где есть определенный продукт
 GET {{baseUrl}}/stocks/?products=2
+Content-Type: application/json
+
+###
+
+# поиск складов, где есть определенный продукт
+GET {{baseUrl}}/stocks/?search=огурец
 Content-Type: application/json
