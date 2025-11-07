@@ -5,7 +5,7 @@
 # получение объявлений
 GET {{baseUrl}}/advertisements/
 Content-Type: application/json
-
+Authorization: Token e3a901208fae1302a507e3521ee2c8693c14cd25
 ###
 
 # создание объявления
@@ -21,12 +21,12 @@ Authorization: Token e30e9e796374ac770cbebc4ed843331236282b5e
 ###
 
 # попытка поменять объявление
-PATCH {{baseUrl}}/advertisements/16/
+PATCH {{baseUrl}}/advertisements/25/
 Content-Type: application/json
 Authorization: Token e30e9e796374ac770cbebc4ed843331236282b5e
 
 {
-  "status": "OPEN"
+  "status": "DRAFT"
 }
 
 ###

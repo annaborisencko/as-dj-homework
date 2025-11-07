@@ -37,15 +37,18 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         # само поле при этом объявляется как `read_only=True`
         validated_data["creator"] = self.context["request"].user
         return super().create(validated_data)
+    
+
 
     def validate(self, data):
         """Метод для валидации. Вызывается при создании и обновлении."""
-        open_adv_count = Advertisement.objects.filter(
-            creator=self.context["request"].user,
-            status='OPEN'
-        ).count()
-        
+  
+
         if self.context["request"].method == 'POST':
+            open_adv_count = Advertisement.objects.filter(
+                creator=self.context["request"].user,
+                status='OPEN'
+            ).count()
             if open_adv_count >= 10:
                 raise ValidationError({
                     'limit_error': "Превышен лимит по открытым объявлениям (не более 10)"
