@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.forms import ValidationError
 from rest_framework import serializers
 
-from advertisements.models import Advertisement
+from advertisements.models import Advertisement, UserFavoriteAdvertisement
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -12,7 +12,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'first_name',
                   'last_name',)
-
 
 class AdvertisementSerializer(serializers.ModelSerializer):
     """Serializer для объявления."""
@@ -61,5 +60,42 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             ):
                 raise ValidationError({
                     'same_error': "У вас уже есть открытое объявление с таким наименованием"
+                })
+        return data
+    
+class UserFavoriteAdvertisementSerializer(serializers.ModelSerializer):
+    """Serializer для избранных объявлений пользователя."""
+    user = UserSerializer(
+        read_only=True,
+    )
+    
+    class Meta:
+        model = UserFavoriteAdvertisement
+        fields = ('id', 'user', 'advertisement', 'created_at')
+        read_only_fields = ['user', 'created_at']
+
+    def create(self, validated_data):
+        """Метод для создания"""
+
+        validated_data["user"] = self.context["request"].user
+        return super().create(validated_data)
+    
+    def validate(self, data):
+        """Метод для валидации. Вызывается при добавлении объявления в избранное."""
+        if self.context["request"].method == 'POST':
+            if Advertisement.objects.filter(
+                id=data['advertisement'].id,
+                creator = self.context["request"].user
+            ):
+                raise ValidationError({
+                    'own_error': "Нельзя добавить в избранное свои объявления"
+                })
+
+            if UserFavoriteAdvertisement.objects.filter(
+                advertisement=data['advertisement'],
+                user=self.context["request"].user,
+            ):
+                raise ValidationError({
+                    'same_error': "Объявление уже добавлено в избранное"
                 })
         return data

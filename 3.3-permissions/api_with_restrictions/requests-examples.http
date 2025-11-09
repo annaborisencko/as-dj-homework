@@ -32,7 +32,7 @@ Authorization: Token e30e9e796374ac770cbebc4ed843331236282b5e
 ###
 
 # попытка удалить объявление
-DELETE {{baseUrl}}/advertisements/9/
+DELETE {{baseUrl}}/advertisements/1/
 Content-Type: application/json
 Authorization: Token e30e9e796374ac770cbebc4ed843331236282b5e
 
@@ -48,5 +48,23 @@ Content-Type: application/json
 GET {{baseUrl}}/advertisements/?created_at_before=2025-10-01
 Content-Type: application/json
 
+###
 
-e30e9e796374ac770cbebc4ed843331236282b5e
+# фильтрация по статусу
+GET {{baseUrl}}/advertisements/?status=OPEN
+Content-Type: application/json
+# Authorization: Token e30e9e796374ac770cbebc4ed843331236282b5e
+
+###
+
+# получение избранных объявлений
+GET {{baseUrl}}/advertisements/favorite_advertisements/
+Content-Type: application/json
+Authorization: Token e3a901208fae1302a507e3521ee2c8693c14cd25
+
+###
+
+# добавление объявления в избранное
+POST {{baseUrl}}/advertisements/13/add_to_favorite/
+Content-Type: application/json
+Authorization: Token e3a901208fae1302a507e3521ee2c8693c14cd25

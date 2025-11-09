@@ -29,3 +29,20 @@ class Advertisement(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )
+
+class UserFavoriteAdvertisement(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    advertisement = models.ForeignKey(
+        Advertisement,
+        on_delete=models.CASCADE,
+        verbose_name='Избранные объявления',
+        related_name='favorite_advertisements',
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Добавлено в избранное:',
+        null=True
+    )
